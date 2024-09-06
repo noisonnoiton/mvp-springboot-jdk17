@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mvp-springboot-dev
+
+resources:
+- ../../base
+
+patches:
+- path: ./deployment-patches.yaml
+  target:
+    kind: Deployment
+- path: ./ingress-patches.yaml
+  target:
+    kind: Ingress
+
+images:
+- name: axccoe/mvp-springboot-jdk17
+  newName: tiuaxcoetmpacr.azurecr.io/axccoe/mvp-springboot-jdk17-dev
+  newTag: "20240902074809"
+
+resources:
+- ../../base
